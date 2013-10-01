@@ -4,6 +4,7 @@
     <title>Style guide</title>
     <link rel="stylesheet" href="/static/css/post.css">
 
+        <link rel="stylesheet" href="/static/css/normalise.css">
         <link rel="stylesheet" href="/static/css/base.css">
         <link rel="stylesheet" href="/static/css/syntax.css">
 
@@ -14,6 +15,14 @@
           type="application/atom+xml">
     </head>
     <body>
+        <nav>
+            <ul class="nav">
+                
+                  <li>
+                    <a href="/">Home</a>
+                
+              </ul>
+        </nav>
         
     <header>
         <h1>Style guide</h1>
@@ -29,9 +38,26 @@
 <h4>This is an h4 header</h4>
 <h5>This is an h5 header</h5>
 <p>This is a paragraph</p>
-<p><em>Bold text</em>
-<em>emphasised text</em></p>
-<h2>Code sample</h2>
+<p><strong>Bold text</strong></p>
+<p><em>emphasised text</em></p>
+<h3>List</h3>
+<ul>
+<li>Abacus<ul>
+<li>answer</li>
+</ul>
+</li>
+<li>Bubbles<ol>
+<li>bunk</li>
+<li>bupkis<ul>
+<li>BELITTLER</li>
+</ul>
+</li>
+<li>burper</li>
+</ol>
+</li>
+<li>Cunning</li>
+</ul>
+<h3>Code sample</h3>
 <div class="codehilite"><pre><span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">urljoin</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
 <span class="kn">from</span> <span class="nn">werkzeug.contrib.atom</span> <span class="kn">import</span> <span class="n">AtomFeed</span>
@@ -59,4 +85,15 @@
     </div>
 
     </body>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-115744-9']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
 </html>
