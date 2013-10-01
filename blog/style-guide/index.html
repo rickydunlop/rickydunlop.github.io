@@ -1,0 +1,62 @@
+<html>
+    <head>
+        
+    <title>Style guide</title>
+    <link rel="stylesheet" href="/static/css/post.css">
+
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Atom Feed -->
+        <link href="/feed.atom"
+          rel="alternate"
+          title="Recent Changes"
+          type="application/atom+xml">
+    </head>
+    <body>
+        
+    <header>
+        <h1>Style guide</h1>
+        
+        <time>October 01, 2013</time>
+    </header>
+
+    <div id="content">
+        <h2>Style guide</h2>
+<h1>This is an h1 header</h1>
+<h2>This is an h2 header</h2>
+<h3>This is an h3 header</h3>
+<h4>This is an h4 header</h4>
+<h5>This is an h5 header</h5>
+<p>This is a paragraph</p>
+<p><em>Bold text</em>
+<em>emphasised text</em></p>
+<h2>Code sample</h2>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">werkzeug.contrib.atom</span> <span class="kn">import</span> <span class="n">AtomFeed</span>
+
+
+<span class="k">def</span> <span class="nf">make_external</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url_root</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/recent.atom&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">recent_feed</span><span class="p">():</span>
+    <span class="n">feed</span> <span class="o">=</span> <span class="n">AtomFeed</span><span class="p">(</span><span class="s">&#39;Recent Articles&#39;</span><span class="p">,</span>
+                    <span class="n">feed_url</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">url_root</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">Article</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Article</span><span class="o">.</span><span class="n">pub_date</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span> \
+                      <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="n">feed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">rendered_text</span><span class="p">),</span>
+                 <span class="n">content_type</span><span class="o">=</span><span class="s">&#39;html&#39;</span><span class="p">,</span>
+                 <span class="n">author</span><span class="o">=</span><span class="n">article</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                 <span class="n">url</span><span class="o">=</span><span class="n">make_external</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">url</span><span class="p">),</span>
+                 <span class="n">updated</span><span class="o">=</span><span class="n">article</span><span class="o">.</span><span class="n">last_update</span><span class="p">,</span>
+                 <span class="n">published</span><span class="o">=</span><span class="n">article</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">feed</span><span class="o">.</span><span class="n">get_response</span><span class="p">()</span>
+</pre></div>
+    </div>
+
+    </body>
+</html>
